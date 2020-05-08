@@ -278,7 +278,7 @@ void QUANTAnet_rbudpBase_c::initErrorBitmap()
 	int i;
 	// the first byte is 0 if there is error.  1 if all done.
 	int startOfLastByte = totalNumberOfPackets - (sizeofErrorBitmap-2)*8;
-	char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080};
+	char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, static_cast<char>(0x0080)};
 
 	/* The first byte is for judging all_done */
 	for (i=0;i<sizeofErrorBitmap;i++)
@@ -320,7 +320,7 @@ int  QUANTAnet_rbudpBase_c::ptohseq( int origseq )
 void QUANTAnet_rbudpBase_c::updateErrorBitmap(long long seq)
 {
 	long long index_in_list, offset_in_index;
-	char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080};
+	char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, static_cast<char>(0x0080)};
 	if(peerswap)
 	    seq = swab32(seq);
 	if(seq < 0 || (seq >> 3) >= sizeofErrorBitmap-1) {
@@ -349,7 +349,7 @@ int QUANTAnet_rbudpBase_c::updateHashTable()
 {
 int count = 0;
 int i,j;
-char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, 0x0080};
+char bits[8] = {0x0001, 0x0002, 0x0004, 0x0008, 0x0010, 0x0020, 0x0040, static_cast<char>(0x0080)};
 
 for (i=1;i<sizeofErrorBitmap; i++)
 {
