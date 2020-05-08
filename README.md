@@ -2,56 +2,49 @@
 
 A CMake-enabled version of the Reliable Blast UDP 1.0 codebase.
 
+Original sources forked from here:
+
 https://www.evl.uic.edu/cavern/RBUDP/Reliable%20Blast%20UDP.html
 
 ## Single File Transfer
 
 ### To Transfer a file between two end-nodes
 
-The following step are needed to transfer a file between two end-nodes
+The following step are needed to transfer a file between two end-nodes.
 
 #### On the Sender side
 
 Execute the `sendfile` on the node where the data file is present.
 
-Typical command to execute is:
-
 ```
 $ sendfile <receiver> <sending rate (Kbps)> <MTU>
 ```
 
-where:
-
 `receiver` is the IP address of the receiver.
 
-`sending rate in Kbps` eg. 700000 to get 700Mbps network transfer or memory to memory speeds. Disk speeds are typically slower than network speeds.
+`sending rate in Kbps` eg. `700000` to get 700Mbps network transfer or memory to memory speeds. Disk speeds are typically slower than network speeds.
 
-`MTU` if 1500 MTU then you can specify 1460 for transport protocol if MTU == 9000, we typically use 8192 for efficient memory/page usage.
+`MTU` if 1500 MTU then you can specify `1460` for transport protocol if MTU == 9000, we typically use `8192` for efficient memory/page usage.
 
 #### On the Receiver Side
 
 Execute the `recvfile` on the receiver.
 
-Typical command to execute is:
-
 ```
 $ recvfile <sender> <path to the orig file> <path to the dest file name> <MTU>
 ```
 
-where:
-
 `sender` is the IP address of the sender.
 
-`path to the orig file>` is the complete path to the file on the sender.
+`path to the orig file` is the complete path to the file on the sender.
 
 `path to the dest file name` is the complete path of the file on the receiver.
 
-`MTU` if 1500 MTU then you can specify 1460 for transport protocol if MTU == 9000, we typically use 8192 for efficient memory/page usage.
-
+`MTU` if 1500 MTU then you can specify `1460` for transport protocol if MTU == 9000, we typically use `8192` for efficient memory/page usage.
 
 ### NOTES
 
-1. The port being used is 38000. You can modify this in sendfile.cxx and recvfile.cxx if you have firewall issues.
+1. The port being used is `38000`. You can modify this in `sendfile.cxx` and `recvfile.cxx` if you have firewall issues.
 
 2. The MTU sizes on the sender and receiver that is specified on the sender and receiver side must be identical. It crashes as the check is not being made. In future the smaller of the two will be chosen as the consensus value.
 
@@ -65,41 +58,33 @@ The following step are needed to transfer a list(set) of files between two end-n
 
 Execute the `sendfilelist` on the node where the data files are present.
 
-Typical command to execute is:
-
 ```
 $ sendfilelist <receiver> <sending rate (Kbps)> <port> <MTU>
 ```
 
-where:
-
 `receiver` is the IP address of the receiver.
 
-`sending rate in Kbps` eg. 700000 to get 700Mbps network transfer or memory to memory speeds. Disk speeds are typically slower than network speeds.
+`sending rate in Kbps` eg. `700000` to get 700Mbps network transfer or memory to memory speeds. Disk speeds are typically slower than network speeds.
 
-`port` i.e the port where the server will be initialized eg. 7000.
+`port` is the port where the server will be initialized eg. `7000`.
 
-`MTU` if 1500 MTU then you can specify 1460 for transport protocol if MTU == 9000, we typically use 8192 for efficient memory/page usage.
+`MTU` if 1500 MTU then you can specify `1460` for transport protocol if MTU == 9000, we typically use `8192` for efficient memory/page usage.
 
 #### On the Receiver Side
 
 Execute the `recvfilelist` on the receiver.
 
-Typical command to execute is:
-
 ```
 $ recvfilelist <sender> <filelist> <port> <MTU>
 ```
-
-where:
 
 `sender` is the IP address of the sender.
 
 `filelist` is a text file that contains the list of file on the sender side and the path of the destination file on the receiver. The separator is a blank space. Details in the NOTES section below.
 
-<port> i.e the port where the server is running eg.if the server is running on the sender at 7000, the value would be 7000.
+`port` is the port where the server is running eg.if the server is running on the sender at 7000, the value would be `7000`.
 
-`MTU` if 1500 MTU then you can specify 1460 for transport protocol if MTU == 9000, we typically use 8192 for efficient memory/page usage.
+`MTU` if 1500 MTU then you can specify `1460` for transport protocol if MTU == 9000, we typically use `8192` for efficient memory/page usage.
 
 ### NOTES
 
@@ -145,11 +130,11 @@ Adjustable verbose-ness from 0 (quiet, only serious errors shown), 1 (packet-los
 
 Disabled writing `progress.log` file unless verboseness is 2.
 
-Add block-size (default -b 64M) and port-number (default -p 38000) options to send/recvstream.
+Add block-size (default `-b 64M`) and port-number (default `-p 38000`) options to `send`/`recvstream`.
 
-Rearranged the parameter order on usend/urecv to make a little more sense.
+Rearranged the parameter order on `usend`/`urecv` to make a little more sense.
 
-Made helpful Usage messages on sendstream/recvstream and usend/urecv.
+Made helpful Usage messages on `sendstream`/`recvstream` and `usend`/`urecv`.
 
 Packet-loss stats messages include transfer size and performance estimates.
 
